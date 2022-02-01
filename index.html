@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body onload="api()">
+    <style type="text/css">
+        div{
+            width: 30%;
+            height: 400px;
+            border: solid 1px;
+            float: left;
+            margin-left: 2%;
+            text-align: center;
+        }
+        button{
+            margin: 2% 0 0 40% ;
+            width: 20%;
+        }
+    </style>
+    <script type="text/javaScript">
+
+    function api() {
+    for(let i = 1; i<=3;i++) {
+        var numero  = Math.floor(Math.random() * (826 - 1)) + 1;
+        fetch('https://rickandmortyapi.com/api/character/'+numero)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data){
+            console.log(data.image, data.name);
+            document.getElementById("myImage"+i).src = data.image;  
+            document.getElementById("nome"+i).innerText = data.name;  
+            document.getElementById("vivo"+i).innerText = data.status; 
+            document.getElementById("especie"+i).innerText = data.species; 
+             
+        });
+     }        
+    }
+        
+    </script>
+    
+    <div>
+        <img id="myImage1" src=""><br>
+        NOME: <label id="nome1"></label><br>
+        STATUS: <label id="vivo1"></label><br>
+        ESPECIE: <label id="especie1"></label><br>
+    </div>
+    <div>
+        <img id="myImage2" src=""><br>
+        NOME: <label id="nome2"></label><br>
+        STATUS: <label id="vivo2"></label><br>
+        ESPECIE: <label id="especie2"></label><br>
+    </div>
+    <div>
+        <img id="myImage3" src=""><br>
+        NOME: <label id="nome3"></label><br>
+        STATUS: <label id="vivo3"></label><br>
+        ESPECIE: <label id="especie3"></label><br>
+    </div>
+    <button onclick="api()">Mudar personagens</button>
+</body>
+
+</html>
